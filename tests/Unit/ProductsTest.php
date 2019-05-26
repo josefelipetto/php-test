@@ -23,4 +23,5 @@ class ProductsTest extends TestCase
 
         $this->assertEquals('/products/' . $product->slug, $product->path());
     }
+
 }

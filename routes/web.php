@@ -20,6 +20,6 @@ Route::get('/retailers',  'RetailersController@index');
 Route::get('/retailers/{retailer}',  'RetailersController@show');
 Route::post('/retailers', 'RetailersController@store');
 
-Route::get('/products',  'ProductsController@index');
+Route::get('/products',  'ProductsController@index')->name('products');
 Route::get('/products/{product}','ProductsController@show');
 Route::post('/products', 'ProductsController@store');
