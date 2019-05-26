@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/retailers',  'RetailersController@index');
+Route::post('/retailers', 'RetailersController@store');
+
+Route::get('/products',  'ProductsController@index');
+Route::post('/products', 'ProductsController@store');
