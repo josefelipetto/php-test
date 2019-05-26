@@ -92,4 +92,26 @@ class RetailersTest extends TestCase
 
         $this->post('/retailers', $attributes)->assertSessionHasErrors('website');
     }
+
+
+    /**
+     * Test if a user can view Retailer informations
+     * @test
+     * @return void
+     */
+    public function a_user_can_view_a_retailer()
+    {
+
+        $this->withoutExceptionHandling();
+
+        $retailer = factory(Retailer::class)->create();
+
+        $this->get($retailer->path())
+        ->assertSee($retailer->name)
+        ->assertSee($retailer->logo)
+        ->assertSee($retailer->description)
+        ->assertSee($retailer->website);
+
+    }
+
 }

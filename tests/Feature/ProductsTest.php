@@ -109,4 +109,24 @@ class ProductsTest extends TestCase
         $this->post('/products', $attributes)->assertSessionHasErrors('retailer_id');
     }
 
+
+    /**
+     * A user must see a product
+     * @test
+     * @return void
+     */
+    public function a_user_must_see_a_product()
+    {
+        $this->withoutExceptionHandling();
+
+        $product = factory(Product::class)->create();
+
+        $this->get($product->path())
+            ->assertSee($product->name)
+            ->assertSee($product->price)
+            ->assertSee($product->description)
+            ->assertSee($product->image)
+            ->assertSee($product->retailer_id);
+
+    }
 }

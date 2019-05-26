@@ -28,6 +28,11 @@ class RetailersController extends Controller
         return redirect('/retailers');
     }
 
+    public function show(Retailer $retailer)
+    {
+        return view('retailers.show',compact('retailer'));
+    }
+
 
 
 }
