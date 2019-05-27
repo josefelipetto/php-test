@@ -2,15 +2,17 @@
 
 namespace Tests\Feature;
 
+use App\Mail\ClientSubscribed;
 use App\Product;
 use App\Retailer;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductsTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
+    use WithFaker;
 
 
     /**
@@ -129,4 +131,5 @@ class ProductsTest extends TestCase
             ->assertSee($product->retailer_id);
 
     }
+
 }

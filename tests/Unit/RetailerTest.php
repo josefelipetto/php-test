@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class RetailerTest extends TestCase
 {
 
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /**
      * A basic unit test example.

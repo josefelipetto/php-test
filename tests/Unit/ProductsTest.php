@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ProductsTest extends TestCase
 {
 
-    use WithFaker, RefreshDatabase;
+    use WithFaker;
 
     /**
      * Check if Model has a path

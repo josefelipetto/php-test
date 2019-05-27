@@ -16,3 +16,23 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/retailers',  'API\RetailersController@index');
+
+Route::get('/retailers/{retailer}',  'API\RetailersController@show');
+
+Route::post('/retailers', 'API\RetailersController@store');
+
+Route::post('/retailers', 'API\RetailersController@store');
+
+Route::put('/retailers/{retailer}', 'API\RetailersController@update');
+
+
+Route::get('/{products?}',  'API\ProductsController@index');
+
+Route::get('/products/{product}','API\ProductsController@show');
+
+Route::put('/products/{product}', 'API\ProductsController@update');
+
+Route::post('/products', 'API\ProductsController@store');
