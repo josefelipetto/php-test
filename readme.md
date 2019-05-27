@@ -42,13 +42,13 @@ This will seed your database with dummy data again.
 
 ## API Endpoints
 
-* GET  /retailers
-* GET /retailers/{retailer}
-* POST /retailers
-* POST /retailers
-* PUT /retailers/{retailer}
-* GET /products
-* GET /products/{product}
-* PUT /products/{product}
-* POST /products
+* GET  /api/retailers
+* GET /api/retailers/{retailer}
+* POST /api/retailers
+* POST /api/retailers
+* PUT /api/retailers/{retailer}
+* GET /api/products
+* GET /api/products/{product}
+* PUT /api/products/{product}
+* POST /api/products
 
