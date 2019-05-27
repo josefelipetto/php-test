@@ -22,6 +22,6 @@ class SubscriptionController extends Controller
             )
         );
 
-        return back()->with('success', 'Thank you! Your e-mail has been sent');
+        return back()->with('success', 'Thank you! Your e-mail has been sent. Location of the e-mail: /storage/logs/laravel-YYYY-MM-DD.log');
     }
 }
