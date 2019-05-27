@@ -5,7 +5,7 @@
 * Change all the DB Variables to match your local environment
 * Save it
 
-## Installation
+##  Installation
 
 Once you get your environment ready to PHP and Laravel(https://laravel.com/docs/5.8/homestead or https://laradock.io/ ), change the directory to the root of the project
 and run:
