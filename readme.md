@@ -20,7 +20,7 @@ Since the automated tests erases the database, after you execute it, run the fol
 
 This will seed your database with dummy data again.
 
-## Server side Endpoints
+##  Server side Endpoints
 
 * GET /retailers
 * GET /retailers/{retailer}
