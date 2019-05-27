@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use App\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SubscriptionsTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A subscription must have an e-mail
      * @test
@@ -14,7 +16,7 @@ class SubscriptionsTest extends TestCase
      */
     public function a_subscription_must_have_an_email()
     {
-        $product = Product::first();
+        $product = factory(Product::class)->create();
 
         $attributes = [
             'email' => '',
@@ -31,7 +33,7 @@ class SubscriptionsTest extends TestCase
      */
     public function a_subscription_must_have_a_product_id()
     {
-        $product = Product::first();
+        $product = factory(Product::class)->create();
 
         $attributes = [
             'email' => 'admin@smallcommerce.com',

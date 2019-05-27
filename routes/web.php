@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/retailers',  'RetailersController@index')->name('retailers ');
+Route::get('/retailers',  'RetailersController@index');
 
 Route::get('/retailers/{retailer}',  'RetailersController@show');
 

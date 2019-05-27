@@ -36,7 +36,7 @@ class ProductsController extends Controller
         $rules = [
             'name' => 'required|string',
             'price' => 'required|numeric',
-            'image' => 'required|file',
+            'image' => 'required',
             'description' => 'required|string',
             'retailer_id' => 'required|integer'
         ];
@@ -103,7 +103,7 @@ class ProductsController extends Controller
         $rules = [
             'name' => 'string',
             'price' => 'numeric',
-            'image' => 'file',
+            'image' => '',
             'description' => 'string',
             'retailer_id' => 'integer'
         ];

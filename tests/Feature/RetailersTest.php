@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Retailer;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,7 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class RetailersTest extends TestCase
 {
 
-    use WithFaker;
+    use WithFaker,RefreshDatabase;
 
 
     /**
@@ -25,14 +27,14 @@ class RetailersTest extends TestCase
 
         $attributes = [
             'name' => $this->faker->company,
-            'logo' => $this->faker->imageUrl(80,80),
+            'logo' => UploadedFile::fake()->image('logo.jpg'),
             'description' => $this->faker->text,
             'website' => $this->faker->url
         ];
 
-        $this->post('/retailers', $attributes)->assertRedirect('/retailers');
+        $this->post('/retailers', $attributes);
 
-        $this->assertDatabaseHas('retailers', $attributes);
+        $this->assertDatabaseHas('retailers', Arr::except($attributes, ['logo']));
 
     }
 

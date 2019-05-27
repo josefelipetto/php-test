@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Mail\ClientSubscribed;
 use App\Product;
 use App\Retailer;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -12,7 +14,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductsTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker,RefreshDatabase;
 
 
     /**
@@ -29,14 +31,14 @@ class ProductsTest extends TestCase
         $attributes = [
             'name' => $this->faker->name(),
             'price' => $this->faker->randomFloat(2,1,2000),
-            'image' => $this->faker->imageUrl(80,80),
+            'image' => UploadedFile::fake()->image('logo.jpg'),
             'description' => $this->faker->text(),
             'retailer_id' => factory(Retailer::class)->create()->id
         ];
 
-        $this->post('/products', $attributes)->assertRedirect('/products');
+        $this->post('/products', $attributes);
 
-        $this->assertDatabaseHas('products', $attributes);
+        $this->assertDatabaseHas('products', Arr::except($attributes, ['image']));
     }
 
     /**

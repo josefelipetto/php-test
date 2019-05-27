@@ -43,7 +43,7 @@
                 <div class="navbar-item">
                     <div class="field is-grouped">
                         <p class="control">
-                            <a href="{{ route('retailers')  }}"> Retailers </a>
+                            <a href="/retailers"> Retailers </a>
                         </p>
                     </div>
                 </div>
