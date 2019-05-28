@@ -23,32 +23,32 @@ This will seed your database with dummy data again.
 ##  Server side Endpoints
 
 * GET /retailers
-* GET /retailers/{retailer}
+* GET /retailers/{retailer_slug}
 * POST /retailers
 * GET /create/retailers
 * POST /retailers
-* GET /edit/retailers/{retailer}
-* PUT /retailers/{retailer}
+* GET /edit/retailers/{retailer_slug}
+* PUT /retailers/{retailer_slug}
   
   
 * GET / 
 * GET /products
-* GET /products/{product}
-* PUT /products/{product}  
-* POST /products/{product}/subscribe
+* GET /products/{product_slug}
+* PUT /products/{product_slug}  
+* POST /products/{product_slug}/subscribe
 * POST /products
 * GET /create/products
-* GET /edit/products/{product}
+* GET /edit/products/{product_slug}
 
 ## API Endpoints
 
 * GET  /api/retailers
-* GET /api/retailers/{retailer}
+* GET /api/retailers/{retailer_id}
 * POST /api/retailers
 * POST /api/retailers
-* PUT /api/retailers/{retailer}
+* PUT /api/retailers/{retailer_id}
 * GET /api/products
-* GET /api/products/{product}
-* PUT /api/products/{product}
+* GET /api/products/{product_id}
+* PUT /api/products/{product_id}
 * POST /api/products
 
