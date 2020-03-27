@@ -23,7 +23,7 @@ class ProductsTest extends TestCase
      * @return void
      */
 
-    public function a_user_can_create_a_product()
+    public function a_user_can_create_a_product(): void
     {
 
         $this->withExceptionHandling();
@@ -46,7 +46,7 @@ class ProductsTest extends TestCase
      * @test
      * @return void
      */
-    public  function a_product_must_have_a_name()
+    public  function a_product_must_have_a_name(): void
     {
         $attributes = factory(Product::class)->raw([
             'name' => ''
@@ -75,7 +75,7 @@ class ProductsTest extends TestCase
      * @test
      * @return void
      */
-    public  function a_product_must_have_a_image()
+    public  function a_product_must_have_a_image(): void
     {
         $attributes = factory(Product::class)->raw([
             'image' => ''
@@ -89,7 +89,7 @@ class ProductsTest extends TestCase
      * @test
      * @return void
      */
-    public  function a_product_must_have_a_description()
+    public  function a_product_must_have_a_description(): void
     {
         $attributes = factory(Product::class)->raw([
             'description' => ''
@@ -104,7 +104,7 @@ class ProductsTest extends TestCase
      * @test
      * @return void
      */
-    public  function a_product_must_have_a_retailer_id()
+    public function a_product_must_have_a_retailer_id(): void
     {
         $attributes = factory(Product::class)->raw([
             'retailer_id' => ''
@@ -119,7 +119,7 @@ class ProductsTest extends TestCase
      * @test
      * @return void
      */
-    public function a_user_must_see_a_product()
+    public function a_user_must_see_a_product(): void
     {
         $this->withoutExceptionHandling();
 

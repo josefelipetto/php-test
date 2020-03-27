@@ -13,7 +13,7 @@ class RetailersSeeder extends Seeder
      */
     public function run()
     {
-        factory(Retailer::class, 10)->create()->each(function ($retailer){
+        factory(Retailer::class, 10)->create()->each(static function ($retailer){
 
             $retailer->products()->saveMany(
                 factory(Product::class,10)->make()

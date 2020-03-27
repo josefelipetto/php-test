@@ -20,7 +20,7 @@ class RetailersTest extends TestCase
      * @test
      * @return void
      */
-    public function a_user_can_create_a_retailer()
+    public function a_user_can_create_a_retailer(): void
     {
 
         $this->withExceptionHandling();
@@ -44,7 +44,7 @@ class RetailersTest extends TestCase
      * @test
      * @return void
      */
-    public function a_retailer_requires_a_name()
+    public function a_retailer_requires_a_name(): void
     {
         $attributes = factory(Retailer::class)->raw([
             'name' => ''
@@ -58,7 +58,7 @@ class RetailersTest extends TestCase
      * @test
      * @return void
      */
-    public function a_retailer_requires_a_logo()
+    public function a_retailer_requires_a_logo(): void
     {
         $attributes = factory(Retailer::class)->raw([
             'logo' => ''
@@ -72,7 +72,7 @@ class RetailersTest extends TestCase
      * @test
      * @return void
      */
-    public function a_retailer_requires_a_description()
+    public function a_retailer_requires_a_description(): void
     {
         $attributes = factory(Retailer::class)->raw([
             'description' => ''
@@ -86,7 +86,7 @@ class RetailersTest extends TestCase
      * @test
      * @return void
      */
-    public function a_retailer_requires_a_website()
+    public function a_retailer_requires_a_website(): void
     {
         $attributes = factory(Retailer::class)->raw([
             'website' => ''
@@ -101,7 +101,7 @@ class RetailersTest extends TestCase
      * @test
      * @return void
      */
-    public function a_user_can_view_a_retailer()
+    public function a_user_can_view_a_retailer(): void
     {
 
         $this->withoutExceptionHandling();

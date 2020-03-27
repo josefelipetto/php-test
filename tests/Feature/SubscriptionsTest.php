@@ -14,7 +14,7 @@ class SubscriptionsTest extends TestCase
      * @test
      * @return void
      */
-    public function a_subscription_must_have_an_email()
+    public function a_subscription_must_have_an_email(): void
     {
         $product = factory(Product::class)->create();
 
@@ -31,7 +31,7 @@ class SubscriptionsTest extends TestCase
      * @test
      * @return void
      */
-    public function a_subscription_must_have_a_product_id()
+    public function a_subscription_must_have_a_product_id(): void
     {
         $product = factory(Product::class)->create();
 
