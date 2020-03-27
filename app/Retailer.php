@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 /**
@@ -20,20 +21,20 @@ class Retailer extends Model
     /**
      *
      */
-    protected static function boot()
+    protected static function boot() : void
     {
         parent::boot();
 
-        self::saving(function ($retailer) {
+        self::saving(static function ($retailer) {
            $retailer->slug = Str::slug($retailer->name);
         });
     }
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function products()
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
@@ -49,13 +50,13 @@ class Retailer extends Model
     }
 
 
-    public function path()
+    public function path(): string
     {
         return "/retailers/{$this->slug}";
     }
 
 
-    public function getRouteKeyName()
+    public function getRouteKeyName() : string
     {
         return 'slug';
     }

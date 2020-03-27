@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
@@ -19,20 +20,20 @@ class Product extends Model
     /**
      *
      */
-    protected static function boot()
+    protected static function boot() : void
     {
         parent::boot();
 
-        self::saving(function ($product) {
+        self::saving(static function ($product) {
             $product->slug = Str::slug($product->name);
         });
     }
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function retailer()
+    public function retailer(): BelongsTo
     {
         return $this->belongsTo(Retailer::class);
     }
@@ -48,12 +49,12 @@ class Product extends Model
     }
 
 
-    public function path()
+    public function path(): string
     {
         return "/products/{$this->slug}";
     }
 
-    public function getRouteKeyName()
+    public function getRouteKeyName() : string
     {
         return 'slug';
     }
