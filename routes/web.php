@@ -12,6 +12,8 @@
 */
 
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/retailers',  'RetailersController@index');
 
 Route::get('/retailers/{retailer}',  'RetailersController@show');

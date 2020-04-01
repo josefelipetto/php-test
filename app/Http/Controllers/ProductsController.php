@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProduct;
 use App\Product;
-use App\Retailer;
-use Illuminate\Support\Facades\Storage;
+use App\Services\ProductService;
+use App\Services\RetailerService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 /**
  * Class ProductsController
@@ -12,39 +17,35 @@ use Illuminate\Support\Facades\Storage;
  */
 class ProductsController extends Controller
 {
+
+
     /**
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @var ProductService
      */
-    public function store()
+    private $productService;
+    /**
+     * @var RetailerService
+     */
+    private $retailerService;
+
+    public function __construct(ProductService $productService, RetailerService $retailerService)
     {
-        $attributes = request()->validate([
-            'name' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'required|file',
-            'description' => 'required|string',
-            'retailer_id' => 'required|integer'
-        ]);
-
-        $attributes['image'] = $this->uploadImage($attributes['image']);
-
-        Product::create($attributes);
-
-        return redirect('/products')->with('success', 'Product created successfully!');
+        $this->productService = $productService;
+        $this->retailerService = $retailerService;
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
-        $products = Product::with('retailer')->paginate(15);
+        $products = $this->productService->getPaginatedProducts();
         return view('products.index',compact('products'));
     }
 
-
     /**
      * @param Product $product
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function show(Product $product)
     {
@@ -52,36 +53,45 @@ class ProductsController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param StoreProduct $request
+     * @return RedirectResponse|Redirector
+     */
+    public function store(StoreProduct $request)
+    {
+        $attributes = $request->validated();
+
+        $this->productService->store($attributes);
+
+        return redirect('/products')->with('success', 'Product created successfully!');
+    }
+
+    /**
+     * @return Factory|View
      */
     public function create()
     {
-
-        $retailers = $this->getRetailers();
-
+        $retailers = $this->retailerService->getAllRetailers(['id', 'name']);
         return view('products.create', compact('retailers'));
     }
 
     /**
      * @param Product $product
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Product $product)
     {
-        $retailers = $this->getRetailers();
+        $retailers = $this->retailerService->getAllRetailers(['id', 'name']);
 
         $product->load('retailer');
-
         return view('products.edit', compact('retailers', 'product'));
     }
 
     /**
      * @param Product $product
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(Product $product)
     {
-
         $attributes = request()->validate([
             'name' => 'required|string',
             'price' => 'required|numeric',
@@ -90,38 +100,8 @@ class ProductsController extends Controller
             'retailer_id' => 'required|integer'
         ]);
 
-        if(request()->has('image'))
-        {
-            $attributes['image'] = $this->uploadImage($attributes['image']);
-        }
-
-        $product->update($attributes);
+        $this->productService->update($product, $attributes);
 
         return redirect('/products')->with('success', 'Product updated successfully');
-    }
-
-    /**
-     * @return Retailer[]|\Illuminate\Database\Eloquent\Collection
-     */
-    private function getRetailers()
-    {
-        return Retailer::all([
-            'id',
-            'name'
-        ]);
-    }
-
-    /**
-     * @param $image
-     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
-     */
-    private function uploadImage($image)
-    {
-        /* @var \Illuminate\Http\UploadedFile $file */
-        $file = $image;
-
-        $filename = 'product_' . time() . '.' . $file->getClientOriginalExtension();
-
-        return url('/storage/' . $file->storeAs('products', $filename));
     }
 }

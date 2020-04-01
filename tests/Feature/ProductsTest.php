@@ -12,33 +12,62 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class ProductsTest
+ * @package Tests\Feature
+ */
 class ProductsTest extends TestCase
 {
     use WithFaker,RefreshDatabase;
 
-
     /**
-     * A User can create a product
-     * @test
-     * @return void
+     * @return array
      */
-
-    public function a_user_can_create_a_product(): void
+    private function getProductMockData(): array
     {
-
-        $this->withExceptionHandling();
-
-        $attributes = [
+        return [
             'name' => $this->faker->name(),
             'price' => $this->faker->randomFloat(2,1,2000),
             'image' => UploadedFile::fake()->image('logo.jpg'),
             'description' => $this->faker->text(),
             'retailer_id' => factory(Retailer::class)->create()->id
         ];
+    }
+
+    /**
+     * A User can create a product
+     * @test
+     * @return void
+     */
+    public function a_user_can_create_a_product(): void
+    {
+        $this->withExceptionHandling();
+
+        $attributes = $this->getProductMockData();
 
         $this->post('/products', $attributes);
 
         $this->assertDatabaseHas('products', Arr::except($attributes, ['image']));
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_can_update_a_product() : void
+    {
+        $this->withExceptionHandling();
+
+        $data = $this->getProductMockData();
+
+        $product = Product::create($data);
+
+        $data['name'] = 'DumbDumb';
+
+        $this->put("/products/{$product->slug}", $data);
+
+        $updatedProduct = Product::find($product->id);
+
+        $this->assertEquals($updatedProduct->name, $data['name']);
     }
 
     /**
@@ -60,7 +89,7 @@ class ProductsTest extends TestCase
      * @test
      * @return void
      */
-    public  function a_product_must_have_a_price()
+    public  function a_product_must_have_a_price(): void
     {
         $attributes = factory(Product::class)->raw([
             'price' => ''
